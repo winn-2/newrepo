@@ -3,9 +3,9 @@
 let startGroup, mainMenuGroup, foodGroup, drinksGroup, pieGroup, hcGroup;
 let startButton, menuButton, foodMenuB, drinkMenuB, optionPie, optionHotChoc;
 let bowlImg, milkImg, sugarImg, flourImg, eggsImg, spicesImg, fillingImg;
-let bowl, flour, sugar, eggs, milk, filling, spices, heavyCream, cocoa;
+let bowl, mug, flour, sugar, eggs, milk, filling, spices, heavyCream, cocoa;
 let countertop;
-let font, bamPie;
+let font, bamPie, bamHC;
 
 function preload(){
   //startButtonImg = loadImage();
@@ -42,7 +42,8 @@ function setup() {
   
   //make menu buttons + add text + position them out of screen
   menuButton = createSprite(width/2, height/3, 160, 70);
-  menuButton.text = "Choose an Items Menu below";
+  menuButton.text = "Choose an Items\nMenu below";
+  menuButton.textSize = 20;
   menuButton.collider = 'STATIC';
   mainMenuGroup.add(menuButton);
   
@@ -113,9 +114,6 @@ function setup() {
   bamPie.collider = "STATIC";
   pieGroup.add(bamPie);
   
-
-
-
   
   //Drink menu buttons
   optionHotChoc = createSprite(width/2, height*2/5,100, 50);
@@ -123,10 +121,26 @@ function setup() {
   optionHotChoc.textSize = 14;
   optionHotChoc.collider = 'STATIC';
   drinksGroup.add(optionHotChoc);
+ 
+  mug = new Sprite(width/2, 370, 50);
+  hcGroup.add(mug);
+  mug.text = "Mug";
+  mug.collider = 'STATIC';
   
-  heavyCream = createSprite(width/3, height/2,100, 50);
+  
+  heavyCream = createSprite(width/3, height/3, 50, 100);
+ heavyCream.text = "Heavy\n Cream";
   hcGroup.add(heavyCream);
+
+  cocoa = createSprite(width*2/3, height/2, 50,50);
+  cocoa.text = "Cocoa";
+  hcGroup.add(cocoa);
   
+  bamHC = createSprite(width/2, 60, 190, 40);
+  bamHC.text = "BAM! HOT CHOCOLATE!";
+  bamHC.textSize = 15;
+  bamHC.collider = "STATIC";
+  hcGroup.add(bamHC);
   //Begin on start screen
   showOnly(mainMenuGroup);
 
@@ -138,10 +152,6 @@ function draw() {
   background("white");
   //drawSprites();
 
-  //x and y text
-  textSize(12);
-  text(`x: ${mouseX}`, 20+mouseX, mouseY);
-  text(`y: ${mouseY}`, 20+mouseX, 10+mouseY);
   if(startButton.mouse.presses()){
     mainMenu();
   }
@@ -221,5 +231,14 @@ function makePie(){
 
 function makeHC(){
   showOnly(hcGroup);
+  if (mouse.presses()) {
+  	//           (x, y, speed)
+  	//           (position, speed)
+      heavyCream.moveTo(mug.x, mug.y, 8);
+      cocoa.moveTo(mug.x, mug.y, 8);
+       
+      
+      
+    }
 }
 
